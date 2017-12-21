@@ -15,6 +15,7 @@ public class Stack<T> {
         if (stack.Count == 0)
         {
             Debug.LogError("Cannot pop from the stack as nothing has been added yet");
+            return default(T);
         }
         T item = stack[stack.Count - 1];
         stack.RemoveAt(stack.Count - 1);

@@ -5,18 +5,16 @@ using UnityEngine;
 
 [System.Serializable]
 public class LSystem {
-    [SerializeField]private char[] variables;
-    [SerializeField]private char[] constants;
-    [SerializeField]private string axiom;
-    [SerializeField]private Rule[] rules;
+    [SerializeField]
+    private string axiom;
+    [SerializeField]
+    private Rule[] rules;
 
     private int generation = 0;
     private string tree = "";
 
-    public LSystem(char[] variables, char[] constants, string axiom, Rule[] rules)
+    public LSystem(string axiom, Rule[] rules)
     {
-        this.variables = variables;
-        this.constants = constants;
         this.axiom = axiom;
         this.rules = rules;
     }
@@ -44,11 +42,7 @@ public class LSystem {
             {
                 if (temp[tempIndex] == rules[j].Predecessor)
                 {
-                    //If it's one of the variables then replace it - otherwise ignore if it's a constant
-                    if (Array.IndexOf(variables, temp[tempIndex]) > -1)
-                    {
-                        temp = temp.Remove(tempIndex, 1);
-                    }
+                    temp = temp.Remove(tempIndex, 1);
                     //Add the successor characters into place
                     temp = temp.Insert(tempIndex, rules[j].Successor);
                     tempIndex += rules[j].Successor.Length - 1;
@@ -98,32 +92,6 @@ public class LSystem {
         get
         {
             return generation;
-        }
-    }
-
-    public char[] Variables
-    {
-        get
-        {
-            return variables;
-        }
-
-        set
-        {
-            variables = value;
-        }
-    }
-
-    public char[] Constants
-    {
-        get
-        {
-            return constants;
-        }
-
-        set
-        {
-            constants = value;
         }
     }
 }
